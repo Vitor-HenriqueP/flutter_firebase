@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "413218606481",
+    "project_id": "firebase-flutter-vitor",
+    "storage_bucket": "firebase-flutter-vitor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413218606481:android:34adc7fea6e9a210ccde30",
+        "android_client_info": {
+          "package_name": "com.exam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArjDZHxIZ62tGJVbS1-6yLJgRD47qxnzs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
