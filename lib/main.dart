@@ -37,8 +37,44 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Enviar dados ao Firestore')),
-      body: DataInputWidget(),
+      appBar: AppBar(title: const Text('Enviar e listar dados do Firestore')),
+      body: Column(
+        children: [
+          Expanded(child: WordList()), // Lista de palavras do Firestore
+          DataInputWidget(), // Input para enviar dados
+        ],
+      ),
+    );
+  }
+}
+
+class WordList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance.collection('data').snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (snapshot.hasError) {
+          return const Center(child: Text('Erro ao carregar dados'));
+        }
+
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return const Center(child: Text('Nenhuma palavra encontrada.'));
+        }
+
+        final words = snapshot.data!.docs.map((doc) {
+          final data = doc.data() as Map<String, dynamic>;
+          return ListTile(
+            title: Text(data['text'] ?? 'Sem texto'),
+          );
+        }).toList();
+
+        return ListView(children: words);
+      },
     );
   }
 }
